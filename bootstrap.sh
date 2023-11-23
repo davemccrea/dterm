@@ -4,12 +4,12 @@
 chsh -s $(which fish) $USER
 
 # Copy SSH key pair from the base system
-cp -r /var/home/$USER/.ssh /var/home/$USER/distrobox/boxkit/
+cp -r /var/home/$USER/.ssh $HOME/
 
 # Fetch dotfiles
 sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin
-$HOME/.local/bin/chezmoi init git@github.com:davemccrea/dotfiles.git
-$HOME/.local/bin/chezmoi update
+$HOME/.local/bin/chezmoi init --apply git@github.com:davemccrea/dotfiles.git
 
 # Move asdf
-mv /var/tmp/.asdf $HOME/.asdf
+sudo mv /var/tmp/.asdf $HOME/.asdf
+sudo chown -R $USER $HOME/.asdf

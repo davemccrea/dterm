@@ -1,10 +1,28 @@
 #!/bin/bash
 
-# Tidy up old container
-distrobox stop boxkit -Y
-rm -rf ~/distrobox
+echo
+echo "## Stopping old container ##"
+echo
+
+distrobox stop boxkit --yes
+
+
+echo
+echo "## Cleaning up ##"
+echo
+
+sudo rm -rf $HOME/distrobox/boxkit && echo
 distrobox rm boxkit --force
 
-# Fetch new container
-distrobox create -i ghcr.io/davemccrea/boxkit:latest -n boxkit --home ~/distrobox/boxkit
-distrobox enter boxkit -- './bootstrap.sh'
+echo
+echo "## Getting latest image ##"
+echo
+
+podman pull ghcr.io/davemccrea/boxkit:latest
+
+echo
+echo "## Starting up new container ##"
+echo
+
+distrobox create --yes --image ghcr.io/davemccrea/boxkit:latest --name boxkit --home ~/distrobox/boxkit
+distrobox enter boxkit -- 'sh /bootstrap.sh'
