@@ -9,7 +9,7 @@ COPY  extra-packages /
 
 RUN   dnf upgrade -y && \
       dnf install -y dnf-plugins-core && \
-      dnf config-manager --add-repo https://rtx.pub/rpm/rtx.repo && \
+      dnf config-manager --add-repo https://rtx.pub/rpm/rtx.repo -y && \
       dnf install -y rtx && \
       grep -v '^#' /extra-packages | xargs dnf install -y
 
