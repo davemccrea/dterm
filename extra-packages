@@ -1,3 +1,12 @@
 curl
 git
 neovim
+fish
+tmux
+fzf
+fd-find
+ripgrep
+rust-exa
+rtx
+starship
+just

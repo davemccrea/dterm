@@ -9,18 +9,16 @@ COPY  extra-packages /
 
 RUN   dnf upgrade -y && \
       dnf install -y dnf-plugins-core && \
-      dnf config-manager --add-repo https://rtx.pub/rpm/rtx.repo -y && \
-      dnf install -y rtx && \
+      dnf config-manager --add-repo https://rtx.pub/rpm/rtx.repo && \
+      dnf copr enable -y atim/starship && \
       grep -v '^#' /extra-packages | xargs dnf install -y
 
 RUN   rm /extra-packages
 
-RUN   sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+RUN   sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply davemccrea
 
-RUN   ln -fs /bin/sh /usr/bin/sh && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
+RUN   ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
+      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree
  
