@@ -8,12 +8,12 @@ Based on [boxkit](https://github.com/ublue-os/boxkit), a set of GitHub actions a
 
 ### Create box
 
-    distrobox create -i ghcr.io/$GITHUB_USERNAME/boxkit -n boxkit
-    distrobox enter boxkit
+    distrobox create -i ghcr.io/$GITHUB_USERNAME/boxkit:latest -n boxkit --home ~/distrobox/boxkit
+    distrobox enter boxkit -- 'sh bootstrap'
 
 ### Pull down config
 
-Use `chezmoi` to pull down dotfiles and set up git sync.
+Dotfiles are automatically synced with [chezmoi](https://www.chezmoi.io/) when the container is built.
 
 ## Verification
 

@@ -8,17 +8,27 @@ LABEL com.github.containers.toolbox="true" \
 COPY  extra-packages /
 
 RUN   dnf upgrade -y && \
-      dnf install -y dnf-plugins-core && \
-      dnf config-manager --add-repo https://rtx.pub/rpm/rtx.repo && \
       dnf copr enable -y atim/starship && \
+      dnf install -y starship && \
       grep -v '^#' /extra-packages | xargs dnf install -y
-
-RUN   rm /extra-packages
-
-RUN   sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply davemccrea
 
 RUN   ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree
- 
+
+RUN   git config --global user.name "David McCrea"
+RUN   git config --global user.email "git@dmccrea.me" 
+
+# asdf is moved from /var/temp/.asdf to ~/.asdf by the bootstrap script
+ARG   ASDF_DIR="var/tmp/.asdf"
+ARG   ASDF_DATA_DIR="/var/tmp/.asdf"
+RUN   git clone https://github.com/asdf-vm/asdf.git /var/tmp/.asdf && \
+      /var/tmp/.asdf/bin/asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
+      /var/tmp/.asdf/bin/asdf install elixir latest && \
+      /var/tmp/.asdf/bin/asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
+      /var/tmp/.asdf/bin/asdf install erlang latest
+
+COPY  bootstrap.sh /
+
+RUN   rm /extra-packages

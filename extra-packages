@@ -6,8 +6,6 @@ tmux
 fzf
 fd-find
 ripgrep
-rtx
-starship
 just
 rust
 cargo
