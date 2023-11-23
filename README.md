@@ -8,7 +8,7 @@ Based on [boxkit](https://github.com/ublue-os/boxkit), a set of GitHub actions a
 
 ### Create box
 
-    distrobox create -i ghcr.io/ublue-os/boxkit -n boxkit
+    distrobox create -i ghcr.io/$GITHUB_USERNAME/boxkit -n boxkit
     distrobox enter boxkit
 
 ### Pull down config
