@@ -1,18 +1,39 @@
-# boxkit
+# dterm
 
 ## Description
 
-Based on [boxkit](https://github.com/ublue-os/boxkit), a set of GitHub actions and skeleton files to build toolbox and distrobox images.
+A stable and predictible terminal experience. David's Terminal = dterm.
 
-## How to use
+When I start using a new package or tool I add it to the `Containerfile` and push the repo to Github. A Github Action then builds the custom image and pushes it to the registry. I run the `update` script on each device. 
 
-Run the `update` script. This will pull the image from the container registry and create the container. It will also run a bootstrap script which performs tasks that cannot be run in `Containerfile`, for example syncing dotfiles, set default shell, move asdf to userspace etc.
+The bootstrap script runs after Distrobox/Toolbox has created the container and performs tasks such as installing and invoking [chezmoi](https://www.chezmoi.io/) to grab my [dotfiles](https://github.com/davemccrea/dotfiles).
+
+This repo is based on [boxkit](https://github.com/ublue-os/boxkit), a set of GitHub actions and skeleton files to build toolbox and distrobox images.
+
+## Setup
+
+Clone this repo on a machine running Distrobox or Toolbox:
+
+```
+cd dterm
+./update
+```
+
+## Additional setup
+
+### On host
+
+- [Ingegrate VSCode and Distrobox](https://github.com/89luca89/distrobox/blob/main/docs/posts/integrate_vscode_distrobox.md#integrate-vscode-and-distrobox)
+- Add custom keyboard shortcut to Gnome
+  - `gnome-terminal --profile dterm --full-screen`
+- Add custom command to Gnome Terminal profile
+  - `distrobox enter dterm`
+
+### In container
+
+- tmux
+  - Open tmux and invoke `prefix + I` to install plugins
 
 ## Verification
 
-These images are signed with sisgstore's [cosign](https://docs.sigstore.dev/cosign/overview/). You can verify the signature by downloading the `cosign.pub` key from this repo and running the following command:
-
-    cosign verify --key cosign.pub ghcr.io/ublue-os/boxkit
-    
-If you're forking this repo you should [read the docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets) on keeping secrets in github. You need to [generate a new keypair](https://docs.sigstore.dev/cosign/overview/) with cosign. The public key can be in your public repo (your users need it to check the signatures), and you can paste the private key in Settings -> Secrets -> Actions.
-
+These images are signed with sisgstore's [cosign](https://docs.sigstore.dev/cosign/overview/). [Generate a new keypair](https://docs.sigstore.dev/cosign/overview/) with cosign. The public key is kept in the public repo. Paste the private key in Settings -> Secrets -> Actions.

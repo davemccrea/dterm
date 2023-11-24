@@ -4,27 +4,27 @@ echo
 echo "=== Stopping old container ==="
 echo
 
-distrobox stop boxkit
+distrobox stop dterm
 
 echo
 echo "=== Cleaning up ==="
 echo
 
-sudo rm -rf /var/home/$USER/distrobox/boxkit
-distrobox rm boxkit
+sudo rm -rf /var/home/$USER/distrobox/dterm
+distrobox rm dterm
 
 echo
 echo "=== Getting latest image ==="
 echo
 
-podman pull ghcr.io/davemccrea/boxkit:latest
+podman pull ghcr.io/davemccrea/dterm:latest
 
 echo
 echo "=== Starting up new container ==="
 echo
 
-distrobox create --yes --image ghcr.io/davemccrea/boxkit:latest --name boxkit --home ~/distrobox/boxkit
-distrobox enter boxkit -- ' sh /bootstrap.sh'
+distrobox create --yes --image ghcr.io/davemccrea/dterm:latest --name dterm --home ~/distrobox/dterm
+distrobox enter dterm -- ' sh /bootstrap.sh'
 
 echo
 echo "Done!"
