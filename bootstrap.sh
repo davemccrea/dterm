@@ -8,12 +8,18 @@ HOST_HOME=$(echo "$HOME" | sed 's|/distrobox/dterm||')
 # Copy SSH key pair from the base system
 cp -r $HOST_HOME/.ssh ~/
 
+# Ensure we are in the container home directory
+cd ~/
+
 # Fetch dotfiles
 sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
 chezmoi init --apply git@github.com:davemccrea/dotfiles.git
 
 git config --global user.name "David McCrea"
 git config --global user.email "git@dmccrea.me" 
+
+# Install LazyVim plugins
+nvim --headless "+Lazy! sync" +qa
 
 # Setup asdf
 sudo mv /var/tmp/.asdf ~/.asdf
@@ -31,13 +37,8 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs 20.10.0
 asdf global nodejs 20.10.0
 
-# Ensure we use Elixir version declared in .tool-versions
-# file located in container home directory and not host
-# home directory
-cd ~/
-
+# TODO: move to Containerfile
 # Setup Phoenix
 mix local.hex --force
 mix archive.install hex phx_new --force
 
-nvim --headless "+Lazy! sync" +qa
