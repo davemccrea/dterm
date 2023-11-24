@@ -21,13 +21,13 @@ ARG   KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --wit
 RUN   dnf -y groupinstall -y 'Development Tools' 'C Development Tools and Libraries'
 RUN   dnf install -y autoconf ncurses-devel openssl-devel xsltproc fop
 
-# asdf is moved from /var/temp/.asdf to ~/.asdf by the bootstrap script
-ARG   ASDF_DIR="var/tmp/.asdf"
+ARG   ASDF_DIR="/var/tmp/.asdf"
 ARG   ASDF_DATA_DIR="/var/tmp/.asdf"
-RUN   git clone https://github.com/asdf-vm/asdf.git /var/tmp/.asdf && \
-      /var/tmp/.asdf/bin/asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
-      /var/tmp/.asdf/bin/asdf install elixir latest && \
-      /var/tmp/.asdf/bin/asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
-      /var/tmp/.asdf/bin/asdf install erlang latest
+ARG   ASDF_PATH="/var/tmp/.asdf/bin/asdf"
+RUN   git clone https://github.com/asdf-vm/asdf.git /var/tmp/.asdf
+RUN   $ASDF_PATH plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
+      $ASDF_PATH install elixir latest && \
+      $ASDF_PATH plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
+      $ASDF_PATH install erlang latest
 
 RUN   rm /extra-packages

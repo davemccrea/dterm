@@ -6,6 +6,6 @@ tmux
 fzf
 fd-find
 ripgrep
-just
 rust
 cargo
+go
