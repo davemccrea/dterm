@@ -31,6 +31,11 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs 20.10.0
 asdf global nodejs 20.10.0
 
+# Ensure we use Elixir version declared in .tool-versions
+# file located in container home directory and not host
+# home directory
+cd ~/
+
 # Setup Phoenix
 mix local.hex --force
 mix archive.install hex phx_new --force
