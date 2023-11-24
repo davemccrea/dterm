@@ -6,10 +6,10 @@ chsh -s $(which fish) $USER
 HOST_HOME=$(echo "$HOME" | sed 's|/distrobox/dterm||')
 
 # Copy SSH key pair from the base system
-cp -r $HOST_HOME/.ssh ~/
+cp -r $HOST_HOME/.ssh $HOME
 
 # Ensure we are in the container home directory
-cd ~/
+cd $HOME
 
 # Fetch dotfiles
 sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
@@ -22,8 +22,8 @@ git config --global user.email "git@dmccrea.me"
 nvim --headless "+Lazy! sync" +qa
 
 # Setup asdf
-sudo mv /var/tmp/.asdf ~/.asdf
-sudo chown -R $USER ~/.asdf
+sudo mv /var/tmp/.asdf $HOME
+sudo chown -R $USER $HOME/.asdf
 . "$HOME/.asdf/asdf.sh"
 asdf reshim elixir
 asdf reshim erlang
