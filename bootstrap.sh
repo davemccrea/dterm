@@ -3,10 +3,10 @@
 # Set fish as default shell
 chsh -s $(which fish) $USER
 
-BASE_HOME=$(echo "$HOME" | sed 's|/distrobox/dterm||')
+HOST_HOME=$(echo "$HOME" | sed 's|/distrobox/dterm||')
 
 # Copy SSH key pair from the base system
-cp -r $BASE_HOME/.ssh ~/
+cp -r $HOST_HOME/.ssh ~/
 
 # Fetch dotfiles
 sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
