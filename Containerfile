@@ -9,12 +9,7 @@ COPY  bootstrap.sh /
 
 COPY  extra-packages /
 
-RUN   dnf upgrade -y
-
-RUN   dnf copr enable -y atim/starship && \
-      dnf install -y starship
-
-RUN   grep -v '^#' /extra-packages | xargs dnf install -y
+RUN   dnf upgrade -y && grep -v '^#' /extra-packages | xargs dnf install -y
 
 RUN   ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
@@ -33,8 +28,6 @@ RUN   git clone https://github.com/asdf-vm/asdf.git /var/tmp/.asdf && \
       /var/tmp/.asdf/bin/asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
       /var/tmp/.asdf/bin/asdf install elixir latest && \
       /var/tmp/.asdf/bin/asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
-      /var/tmp/.asdf/bin/asdf install erlang latest && \
-      /var/tmp/.asdf/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
-      /var/tmp/.asdf/bin/asdf install nodejs 20.10.0
+      /var/tmp/.asdf/bin/asdf install erlang latest
 
 RUN   rm /extra-packages

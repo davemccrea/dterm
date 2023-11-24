@@ -4,24 +4,23 @@
 chsh -s $(which fish) $USER
 
 # Copy SSH key pair from the base system
-cp -r /var/home/$USER/.ssh $HOME/
+cp -r /var/home/$USER/.ssh ~/
 
 # Fetch dotfiles
-sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin
-$HOME/.local/bin/chezmoi init --apply git@github.com:davemccrea/dotfiles.git
+sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
+chezmoi init --apply git@github.com:davemccrea/dotfiles.git
 
 git config --global user.name "David McCrea"
 git config --global user.email "git@dmccrea.me" 
 
 # Setup asdf
-sudo mv /var/tmp/.asdf $HOME/.asdf
-sudo chown -R $USER $HOME/.asdf
-$HOME/.asdf/bin/asdf reshim elixir
-$HOME/.asdf/bin/asdf reshim erlang
-$HOME/.asdf/bin/asdf reshim nodejs
-$HOME/.asdf/bin/asdf global elixir latest
-$HOME/.asdf/bin/asdf global erlang latest
-$HOME/.asdf/bin/asdf global nodejs lts
+sudo mv /var/tmp/.asdf ~/.asdf
+sudo chown -R $USER ~/.asdf
+. "$HOME/.asdf/asdf.sh"
+asdf reshim elixir
+asdf reshim erlang
+asdf global elixir latest
+asdf global erlang latest
 
 # Setup Phoenix
 mix local.hex --force
