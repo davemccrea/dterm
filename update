@@ -4,17 +4,14 @@ echo
 echo "=== Stopping old container ==="
 echo
 
-distrobox stop boxkit --yes
+distrobox stop boxkit
 
 echo
 echo "=== Cleaning up ==="
 echo
 
-if [ -d "$HOME/distrobox/boxkit" ]; then
-    sudo rm -rf "$HOME/distrobox/boxkit/*" && echo
-fi
-
-distrobox rm boxkit --rm-home --force
+sudo rm -rf /var/home/$USER/distrobox/boxkit
+distrobox rm boxkit
 
 echo
 echo "=== Getting latest image ==="

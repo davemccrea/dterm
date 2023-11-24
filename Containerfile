@@ -35,6 +35,6 @@ RUN   git clone https://github.com/asdf-vm/asdf.git /var/tmp/.asdf && \
       /var/tmp/.asdf/bin/asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
       /var/tmp/.asdf/bin/asdf install erlang latest && \
       /var/tmp/.asdf/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
-      /var/tmp/.asdf/bin/asdf install nodejs lts
+      /var/tmp/.asdf/bin/asdf install nodejs 20.10.0
 
 RUN   rm /extra-packages
