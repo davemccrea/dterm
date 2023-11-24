@@ -25,3 +25,5 @@ asdf global erlang latest
 # Setup Phoenix
 mix local.hex --force
 mix archive.install hex phx_new --force
+
+nvim --headless "+Lazy! sync" +qa
