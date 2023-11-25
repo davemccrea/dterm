@@ -15,6 +15,7 @@ cd $HOME
 sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
 chezmoi init --apply git@github.com:davemccrea/dotfiles.git
 
+# Set git global config
 git config --global user.name "David McCrea"
 git config --global user.email "git@dmccrea.me" 
 
@@ -22,23 +23,16 @@ git config --global user.email "git@dmccrea.me"
 nvim --headless "+Lazy! sync" +qa
 
 # Setup asdf
-sudo mv /var/tmp/.asdf $HOME
+sudo mv /root/.asdf $HOME
 sudo chown -R $USER $HOME/.asdf
-. "$HOME/.asdf/asdf.sh"
-asdf reshim elixir
-asdf reshim erlang
+. "$home/.asdf/asdf.sh"
 asdf global elixir latest
 asdf global erlang latest
+asdf global nodejs latest
+asdf reshim elixir
+asdf reshim erlang
+asdf reshim nodejs
 
-# TODO: move to Containerfile
-# Due to how the nodejs asdf plugin is implemented
-# the install script errors when run in Containerfile
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs 20.10.0
-asdf global nodejs 20.10.0
-
-# TODO: move to Containerfile
 # Setup Phoenix
 mix local.hex --force
 mix archive.install hex phx_new --force
-
