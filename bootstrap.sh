@@ -25,7 +25,7 @@ nvim --headless "+Lazy! sync" +qa
 # Setup asdf
 sudo mv /root/.asdf $HOME
 sudo chown -R $USER $HOME/.asdf
-. "$home/.asdf/asdf.sh"
+. "$HOME/.asdf/asdf.sh"
 asdf global elixir latest
 asdf global erlang latest
 asdf global nodejs latest
