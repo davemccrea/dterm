@@ -10,7 +10,8 @@ echo
 echo "=== Cleaning up ==="
 echo
 
-sudo rm -rf /var/home/$USER/distrobox/dterm
+cd $HOME/distrobox
+sudo rm -rf dterm
 distrobox rm dterm
 
 echo
