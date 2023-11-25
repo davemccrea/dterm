@@ -1,26 +1,24 @@
 #!/bin/bash
 
-# Set fish as default shell
-chsh -s $(which fish) $USER
-
 HOST_HOME=$(echo "$HOME" | sed 's|/distrobox/dterm||')
+
+# Set Fish as default shell
+chsh -s $(which fish) $USER
 
 # Copy SSH key pair from the base system
 cp -r $HOST_HOME/.ssh $HOME
 
-# Ensure we are in the container home directory
-cd $HOME
-
-# Fetch dotfiles
+# Get dotfiles
 sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
 chezmoi init --apply git@github.com:davemccrea/dotfiles.git
 
-# Set git global config
+# Configure git
 git config --global user.name "David McCrea"
 git config --global user.email "git@dmccrea.me" 
 
-# Install LazyVim plugins
+# Install plugins for neovim and tmux
 nvim --headless "+Lazy! sync" +qa
+sh $HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh
 
 # Setup asdf
 sudo mv /root/.asdf $HOME
@@ -34,5 +32,7 @@ asdf reshim erlang
 asdf reshim nodejs
 
 # Setup Phoenix
+# We want to use the .tool-versions in the container home dir not the host home directory
+cd $HOME 
 mix local.hex --force
 mix archive.install hex phx_new --force
