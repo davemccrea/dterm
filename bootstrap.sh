@@ -16,9 +16,8 @@ chezmoi init --apply git@github.com:davemccrea/dotfiles.git
 git config --global user.name "David McCrea"
 git config --global user.email "git@dmccrea.me" 
 
-# Install plugins for neovim and tmux
+# Install plugins for neovim
 nvim --headless "+Lazy! sync" +qa
-sh $HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh
 
 # Setup asdf
 sudo mv /root/.asdf $HOME
