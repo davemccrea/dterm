@@ -26,6 +26,9 @@ sudo chown -R $USER $HOME/.asdf
 asdf global elixir latest
 asdf global erlang latest
 asdf global nodejs latest
+asdf reshim elixir
+asdf reshim erlang
+asdf reshim nodejs
 
 # Setup Phoenix
 # We want to use the .tool-versions in the container home dir not the host home directory
@@ -36,4 +39,4 @@ mix archive.install hex phx_new --force
 # Setup Livebook
 mix do local.rebar --force, local.hex --force
 mix escript.install hex livebook
-asdf reshim elixir
+
