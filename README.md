@@ -4,30 +4,21 @@
 
 A stable and predictible terminal experience. David's Terminal = dterm.
 
-When I start using a new package or tool I add it to the `Containerfile` and push the repo to Github. A Github Action then builds the custom image and pushes it to the registry. I run the `update` script on each device. 
-
-The bootstrap script runs after Distrobox/Toolbox has created the container and performs tasks such as installing and invoking [chezmoi](https://www.chezmoi.io/) to grab my [dotfiles](https://github.com/davemccrea/dotfiles).
+When I start using a new package or tool I add it to the `Containerfile` and push the repo to Github. A Github Action then builds the custom image and pushes it to the registry. The bootstrap script runs after Distrobox/Toolbox has created the container and performs tasks such as installing and invoking [chezmoi](https://www.chezmoi.io/) to grab my [dotfiles](https://github.com/davemccrea/dotfiles).
 
 This repo is based on [boxkit](https://github.com/ublue-os/boxkit), a set of GitHub actions and skeleton files to build toolbox and distrobox images.
 
 ## Setup
 
-Clone this repo on a machine running Distrobox or Toolbox:
+With [Distrobox](https://github.com/89luca89/distrobox) installed run:
 
 ```
-cd dterm
-./update
+distrobox create --image ghcr.io/davemccrea/dterm:latest --name dterm --home ~/distrobox/dterm
 ```
+
+The bootstrap script will run on first load to change the default shell, load dotfiles, etc. 
 
 ## Additional setup
-
-### On host
-
-- [Ingegrate VSCode and Distrobox](https://github.com/89luca89/distrobox/blob/main/docs/posts/integrate_vscode_distrobox.md#integrate-vscode-and-distrobox)
-- Add custom keyboard shortcut to Gnome
-  - `gnome-terminal --profile dterm --full-screen`
-- Add custom command to Gnome Terminal profile
-  - `distrobox enter dterm`
 
 ### In container
 
