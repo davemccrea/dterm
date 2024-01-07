@@ -10,24 +10,29 @@ The bootstrap script runs after Distrobox/Toolbox has created the container and 
 
 This repo is based on [boxkit](https://github.com/ublue-os/boxkit), a set of GitHub actions and skeleton files to build toolbox and distrobox images.
 
+## Requirements
+
+- [Distrobox](https://github.com/89luca89/distrobox)
+
+I recommend using Fedora Silverblue which comes with podman.
+
 ## Setup
 
-Clone this repo on a machine running Distrobox or Toolbox:
-
-```
-cd dterm
-./update
-```
+Clone this repo on a machine running Distrobox or Toolbox and run `update`.
 
 ## Additional setup
 
 ### On host
 
+- Create a profile in Gnome Terminal with command:
+```
+distrobox enter dterm
+```
+- Add custom keyboard shortcut to Gnome with comand:
+```
+gnome-terminal --profile dterm
+```
 - [Ingegrate VSCode and Distrobox](https://github.com/89luca89/distrobox/blob/main/docs/posts/integrate_vscode_distrobox.md#integrate-vscode-and-distrobox)
-- Add custom keyboard shortcut to Gnome
-  - `gnome-terminal --profile dterm --full-screen`
-- Add custom command to Gnome Terminal profile
-  - `distrobox enter dterm`
 
 ### In container
 
