@@ -1,12 +1,10 @@
 #!/bin/bash
 
-HOST_HOME=$(echo "$HOME" | sed 's|/distrobox/dterm||')
-
 # Set Fish as default shell
 chsh -s $(which fish) $USER
 
-# Copy SSH key pair from the base system
-cp -r $HOST_HOME/.ssh $HOME
+# Copy SSH key pair from the host home dir to the container home dir
+cp -r /home/$USER/.ssh $HOME
 
 # Get dotfiles
 sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
@@ -39,4 +37,3 @@ mix archive.install hex phx_new --force
 # Setup Livebook
 mix do local.rebar --force, local.hex --force
 mix escript.install hex livebook --force
-
