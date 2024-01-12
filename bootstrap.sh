@@ -23,6 +23,7 @@ if [ ! -e "$flag_file" ]; then
     nvim --headless "+Lazy! sync" +qa
     
     cd $HOME
+    export ASDF_DATA_DIR=/opt/asdf
     asdf global elixir latest
     asdf global erlang latest
     asdf global nodejs latest
