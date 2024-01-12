@@ -37,8 +37,8 @@ RUN \
       mix do local.rebar --force, local.hex --force && \
       mix escript.install hex livebook --force 
 
-COPY bootstrap.sh /usr/local/bin
-RUN echo "/bin/bash /usr/local/bin/bootstrap.sh" >> /etc/profile
+COPY bootstrap.sh /usr/bin
+RUN echo "/bin/bash /usr/bin/bootstrap.sh" >> /etc/profile
 
 RUN \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
