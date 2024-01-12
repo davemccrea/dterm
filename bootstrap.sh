@@ -2,7 +2,7 @@
 
 set -oue pipefail
 
-flag_file="$HOME/bootstrap_run_once_flag"
+flag_file="$HOME/.bootstrap_run_once_flag"
 
 if [ ! -e "$flag_file" ]; then
     # Set Fish as default shell
