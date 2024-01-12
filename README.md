@@ -10,13 +10,29 @@ This repo is based on [boxkit](https://github.com/ublue-os/boxkit), a set of Git
 
 ## Setup
 
+### Step 1
+
 With [Distrobox](https://github.com/89luca89/distrobox) installed run:
 
 ```
 distrobox create --image ghcr.io/davemccrea/dterm:latest --name dterm --home ~/distrobox/dterm
 ```
 
+### Step 2
+
+```
+distrobox enter dterm
+``` 
+
 The bootstrap script will run on first load to change the default shell, load dotfiles, etc. 
+
+## Update
+
+```
+distrobox stop dterm; \
+distrobox rm dterm; \
+podman pull ghcr.io/davemccrea/dterm
+```
 
 ## Additional setup
 
