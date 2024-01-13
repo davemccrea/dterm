@@ -16,6 +16,7 @@ if [ ! -e "$flag_file" ]; then
     chezmoi init --apply git@github.com:davemccrea/dotfiles.git
     
     # Configure git
+    git config pull.rebase true
     git config --global user.name "David McCrea"
     git config --global user.email "git@dmccrea.me" 
     
