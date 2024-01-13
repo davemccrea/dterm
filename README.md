@@ -31,7 +31,9 @@ The bootstrap script will run on first load to change the default shell, load do
 ```
 distrobox stop dterm; \
 distrobox rm dterm; \
-podman pull ghcr.io/davemccrea/dterm
+sudo rm -rf ~/distrobox/dterm; \
+podman pull ghcr.io/davemccrea/dterm; \
+distrobox create --image ghcr.io/davemccrea/dterm:latest --name dterm --home ~/distrobox/dterm
 ```
 
 ## Additional setup
