@@ -41,6 +41,7 @@ COPY bootstrap.sh /usr/bin
 RUN echo "/bin/bash /usr/bin/bootstrap.sh" >> /etc/profile
 
 RUN \
+      ln -fs /usr/bin/distrobox-host-exec /usr/bin/code && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree
