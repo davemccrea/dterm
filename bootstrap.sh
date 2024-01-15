@@ -23,6 +23,8 @@ if [ ! -e "$flag_file" ]; then
     # Install plugins for neovim
     nvim --headless "+Lazy! sync" +qa
     
+    sudo chown -R $USER:$USER /opt/asdf
+
     cd $HOME
     export ASDF_DATA_DIR=/opt/asdf
     asdf global elixir latest
