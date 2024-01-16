@@ -26,9 +26,6 @@ RUN \
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
       asdf install nodejs latest
 
-# Install Bitwarden
-RUN npm install -g @bitwarden/cli
-
 # Install Elixir tools
 WORKDIR /tmp
 RUN \
