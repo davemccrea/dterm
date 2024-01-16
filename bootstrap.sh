@@ -31,6 +31,10 @@ if [ ! -e "$flag_file" ]; then
     asdf global erlang latest
     asdf global nodejs latest
 
+    # Initiate Postgres
+    sudo postgresql-setup --initdb --unit postgresql
+    RUN sudo systemctl start postgresql
+
     echo "Bootstrap successful."
     touch "$flag_file"
 fi

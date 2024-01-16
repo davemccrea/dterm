@@ -6,7 +6,7 @@ LABEL com.github.containers.toolbox="true" \
       maintainer="github@dmccrea.me"
 
 RUN dnf upgrade -y
-RUN dnf install -y curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool go gh
+RUN dnf install -y curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool go gh postgresql postgresql-server postgresql-contrib
 
 # Install Erlang build dependencies
 ARG KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-odbc"
