@@ -31,6 +31,10 @@ if [ ! -e "$flag_file" ]; then
     asdf global erlang latest
     asdf global nodejs latest
 
+    if [ -e "/var/home/david/.gh_token" ]; then
+        gh auth login --with-token < /var/home/david/.gh_token
+    fi
+
     echo "Bootstrap successful."
     touch "$flag_file"
 fi
