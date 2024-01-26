@@ -20,16 +20,16 @@ if [ ! -e "$flag_file" ]; then
     git config --global user.name "David McCrea"
     git config --global user.email "git@dmccrea.me" 
     
-    # Install plugins for neovim
-    nvim --headless "+Lazy! sync" +qa
-    
     sudo chown -R $USER:$USER /opt/asdf
 
     cd $HOME
     export ASDF_DATA_DIR=/opt/asdf
     asdf global elixir latest
     asdf global erlang latest
-    asdf global nodejs latest
+    asdf global nodejs 20.11.0
+
+    # Install plugins for neovim
+    nvim --headless "+Lazy! sync" +qa
 
     if [ -e "/var/home/david/.gh_token" ]; then
         gh auth login --with-token < /var/home/david/.gh_token
