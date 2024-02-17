@@ -19,11 +19,11 @@ if [ ! -e "$flag_file" ]; then
     git config --global pull.rebase true
     git config --global user.name "David McCrea"
     git config --global user.email "git@dmccrea.me" 
-    
+
     sudo chown -R $USER:$USER /opt/asdf
+    mv /opt/asdf ~/.asdf
 
     cd $HOME
-    export ASDF_DATA_DIR=/opt/asdf
     asdf global elixir latest
     asdf global erlang latest
     asdf global nodejs 20.11.0
