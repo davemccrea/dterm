@@ -21,7 +21,7 @@ if [ ! -e "$flag_file" ]; then
     git config --global user.email "git@dmccrea.me" 
 
     sudo chown -R $USER:$USER /opt/asdf
-    mv /opt/asdf ~/.asdf
+    sudo mv /opt/asdf ~/.asdf
 
     cd $HOME
     asdf global elixir latest
