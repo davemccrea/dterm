@@ -18,10 +18,9 @@ RUN dnf -y groupinstall -y 'Development Tools' 'C Development Tools and Librarie
 RUN dnf install -y autoconf ncurses-devel openssl-devel xsltproc fop
 
 # Install asdf
-ENV PATH="$PATH:/opt/asdf/bin"
-ENV PATH="$PATH:/opt/asdf/shims"
 RUN \
       git clone https://github.com/asdf-vm/asdf.git /opt/asdf && \
+      export PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH"
       export ASDF_DATA_DIR=/opt/asdf && \
       asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
       asdf install elixir latest && \
@@ -34,6 +33,7 @@ RUN \
 WORKDIR /tmp
 RUN \
       export ASDF_DATA_DIR=/opt/asdf && \
+      export PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH"
       asdf local elixir latest && \
       asdf local erlang latest && \
       mix local.hex --force && \

@@ -24,6 +24,7 @@ if [ ! -e "$flag_file" ]; then
     sudo mv /opt/asdf ~/.asdf
 
     cd $HOME
+    export PATH="~/.asdf/bin:$PATH"
     asdf global elixir latest
     asdf global erlang latest
     asdf global nodejs 20.11.0
