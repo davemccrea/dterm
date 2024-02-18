@@ -6,7 +6,11 @@ LABEL com.github.containers.toolbox="true" \
       maintainer="github@dmccrea.me"
 
 RUN dnf upgrade -y
-RUN dnf install -y systemd inotify-tools curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool go gh zoxide php composer
+
+RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
+RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+RUN dnf check-update
+RUN dnf install -y systemd inotify-tools curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool go gh zoxide php composer code
 
 # Install Erlang build dependencies
 ARG KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-odbc"
@@ -41,7 +45,6 @@ COPY bootstrap.sh /usr/bin
 RUN echo "/bin/bash /usr/bin/bootstrap.sh" >> /etc/profile
 
 RUN \
-      ln -fs /usr/bin/distrobox-host-exec /usr/bin/code && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree
