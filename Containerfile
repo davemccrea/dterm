@@ -9,8 +9,11 @@ RUN dnf upgrade -y
 
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
 RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+
+RUN dnf copr enable varlad/helix -y
+
 RUN dnf check-update
-RUN dnf install -y systemd inotify-tools curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool go gh zoxide php composer code
+RUN dnf install -y systemd inotify-tools curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool go gh zoxide php composer code helix
 
 # Install Erlang build dependencies
 ARG KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-odbc"
@@ -29,17 +32,20 @@ RUN \
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
       asdf install nodejs 20.11.0
 
-# Install Elixir tools
+# Install asdf tooling
 WORKDIR /tmp
 RUN \
       export ASDF_DATA_DIR=/opt/asdf && \
       export PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH" && \
       asdf local elixir latest && \
       asdf local erlang latest && \
+      asdf local nodejs 20.11.0 && \
       mix local.hex --force && \
       mix archive.install hex phx_new --force && \
       mix do local.rebar --force, local.hex --force && \
-      mix escript.install hex livebook --force 
+      mix escript.install hex livebook --force && \
+      npm install -g @tailwindcss/language-server && \
+      npm install -g vscode-langservers-extracted
 
 COPY bootstrap.sh /usr/bin
 RUN echo "/bin/bash /usr/bin/bootstrap.sh" >> /etc/profile
