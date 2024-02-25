@@ -13,7 +13,7 @@ RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.mi
 RUN dnf copr enable varlad/helix -y
 
 RUN dnf check-update
-RUN dnf install -y systemd inotify-tools curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool go gh zoxide php composer code helix
+RUN dnf install -y systemd inotify-tools curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix
 
 # Install Erlang build dependencies
 ARG KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-odbc"
@@ -49,6 +49,19 @@ RUN \
 
 COPY bootstrap.sh /usr/bin
 RUN echo "/bin/bash /usr/bin/bootstrap.sh" >> /etc/profile
+
+# Install go
+WORKDIR /tmp
+RUN \
+	wget https://go.dev/dl/go1.22.0.linux-amd64.tar.gz && \
+	rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz && \
+	rm go*.tar.gz
+
+# Install go dev packages
+RUN \
+	export PATH="/usr/local/go:/usr/local/go/bin:$PATH" && \
+	go install github.com/a-h/templ/cmd/templ@latest && \
+	go install -tags 'postgres sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
 RUN \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
