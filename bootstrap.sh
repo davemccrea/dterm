@@ -22,13 +22,12 @@ if [ ! -e "$flag_file" ]; then
 
     sudo mv /opt/asdf ~/.asdf
     sudo chown -R $USER:$USER ~/.asdf
-    asdf reshim
 
     cd $HOME
-    export PATH="~/.asdf/bin:$PATH"
-    asdf global elixir latest
-    asdf global erlang latest
-    asdf global nodejs 20.11.0
+    ~/.asdf/bin/asdf reshim
+    ~/.asdf/bin/asdf global elixir latest
+    ~/.asdf/bin/asdf global erlang latest
+    ~/.asdf/bin/asdf global nodejs 20.11.0
 
     # Install plugins for neovim
     nvim --headless "+Lazy! sync" +qa
