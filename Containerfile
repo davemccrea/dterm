@@ -61,7 +61,8 @@ RUN \
 RUN \
 	export PATH="/usr/local/go:/usr/local/go/bin:$PATH" && \
 	go install github.com/a-h/templ/cmd/templ@latest && \
-	go install -tags 'postgres sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+	go install -tags 'postgres sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest && \
+      go install github.com/cosmtrek/air@latest
 
 RUN \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
