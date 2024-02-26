@@ -13,7 +13,7 @@ RUN sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.mi
 RUN dnf copr enable varlad/helix -y
 
 RUN dnf check-update
-RUN dnf install -y systemd inotify-tools curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix
+RUN dnf install -y systemd inotify-tools curl git neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix rust cargo
 
 # Install Erlang build dependencies
 ARG KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-odbc"
@@ -62,7 +62,7 @@ RUN \
 	export PATH="/usr/local/go:/usr/local/go/bin:$PATH" && \
 	go install github.com/a-h/templ/cmd/templ@latest && \
 	go install -tags 'postgres sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest && \
-      go install github.com/cosmtrek/air@latest
+	go install github.com/cosmtrek/air@latest && \
 
 RUN \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
