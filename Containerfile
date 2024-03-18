@@ -22,7 +22,7 @@ RUN \
       export PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH" && \
       export ASDF_DATA_DIR=/opt/asdf && \
       asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
-      asdf install elixir latest && \
+      asdf install elixir 1.16.1-otp-26 && \
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
       asdf install nodejs 20.11.0 && \
       asdf plugin-add gleam https://github.com/asdf-community/asdf-gleam.git && \
