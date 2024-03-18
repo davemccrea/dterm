@@ -14,12 +14,7 @@ RUN dnf copr enable varlad/helix -y
 RUN dnf copr enable atim/lazygit -y
 
 RUN dnf check-update
-RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix rust cargo
-
-# Install Erlang build dependencies
-ARG KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-odbc"
-RUN dnf -y groupinstall -y 'Development Tools' 'C Development Tools and Libraries'
-RUN dnf install -y autoconf ncurses-devel openssl-devel xsltproc fop
+RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix rust cargo erlang-26.2.2-1.fc39
 
 # Install asdf
 RUN \
@@ -28,8 +23,6 @@ RUN \
       export ASDF_DATA_DIR=/opt/asdf && \
       asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
       asdf install elixir latest && \
-      asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
-      asdf install erlang latest && \
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
       asdf install nodejs 20.11.0 && \
       asdf plugin-add gleam https://github.com/asdf-community/asdf-gleam.git && \
@@ -40,8 +33,7 @@ WORKDIR /tmp
 RUN \
       export ASDF_DATA_DIR=/opt/asdf && \
       export PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH" && \
-      asdf local elixir latest && \
-      asdf local erlang latest && \
+      asdf local elixir 1.16.1-otp-26 && \
       asdf local nodejs 20.11.0 && \
       mix local.hex --force && \
       mix archive.install hex phx_new --force && \
