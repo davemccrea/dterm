@@ -7,14 +7,14 @@ flag_file="$HOME/.bootstrap_run_once_flag"
 if [ ! -e "$flag_file" ]; then
     # Set Fish as default shell
     chsh -s $(which fish) $USER
-    
+
     # Copy SSH key pair from the host home dir to the container home dir
     cp -r /home/$USER/.ssh $HOME
-    
+
     # Get dotfiles
     sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
     chezmoi init --apply git@github.com:davemccrea/dotfiles.git
-    
+
     # Configure git
     git config --global pull.rebase true
     git config --global user.name "David McCrea"
@@ -28,6 +28,7 @@ if [ ! -e "$flag_file" ]; then
     ~/.asdf/bin/asdf global elixir latest
     ~/.asdf/bin/asdf global erlang latest
     ~/.asdf/bin/asdf global nodejs 20.11.0
+    ~/.asdf/bin/asdf global gleam latest
 
     # Install plugins for neovim
     nvim --headless "+Lazy! sync" +qa

@@ -31,7 +31,9 @@ RUN \
       asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
       asdf install erlang latest && \
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
-      asdf install nodejs 20.11.0
+      asdf install nodejs 20.11.0 && \
+      asdf plugin-add gleam https://github.com/asdf-community/asdf-gleam.git && \
+      asdf install gleam latest
 
 # Install asdf tooling
 WORKDIR /tmp
