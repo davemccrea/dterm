@@ -5,6 +5,8 @@ LABEL com.github.containers.toolbox="true" \
       summary="A cloud-native terminal experience" \
       maintainer="github@dmccrea.me"
 
+RUN echo "hello world"
+
 RUN dnf upgrade -y
 
 RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -14,7 +16,7 @@ RUN dnf copr enable varlad/helix -y
 RUN dnf copr enable atim/lazygit -y
 
 RUN dnf check-update
-RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix rust cargo erlang-26.2.2-1.fc39 jq
+RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix erlang-26.2.2-1.fc39 jq
 
 # Install asdf
 RUN \
@@ -57,6 +59,9 @@ RUN \
 	export PATH="/usr/local/go:/usr/local/go/bin:$PATH" && \
 	go install github.com/a-h/templ/cmd/templ@latest && \
 	go install -tags 'postgres sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
+# Install rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 RUN \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
