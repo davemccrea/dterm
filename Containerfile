@@ -5,7 +5,7 @@ LABEL com.github.containers.toolbox="true" \
       summary="A cloud-native terminal experience" \
       maintainer="github@dmccrea.me"
 
-RUN echo "hello world"
+ENV LC_ALL=en_GB.UTF-8
 
 RUN dnf upgrade -y
 
@@ -61,7 +61,7 @@ RUN \
 	go install -tags 'postgres sqlite3' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
 # Install rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
 
 RUN \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
