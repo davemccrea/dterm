@@ -36,6 +36,9 @@ if [ ! -e "$flag_file" ]; then
         gh auth login --with-token < /var/home/david/.gh_token
     fi
 
+    # Install rustup
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
     echo "Bootstrap successful."
     touch "$flag_file"
 fi
