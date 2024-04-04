@@ -16,7 +16,7 @@ RUN dnf copr enable varlad/helix -y
 RUN dnf copr enable atim/lazygit -y
 
 RUN dnf check-update
-RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix erlang-26.2.2-1.fc39 jq gcc
+RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix erlang-26.2.2-1.fc39 jq gcc openssl-devel
 
 # Install asdf
 RUN \
