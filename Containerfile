@@ -5,6 +5,8 @@ LABEL com.github.containers.toolbox="true" \
       summary="A cloud-native terminal experience" \
       maintainer="github@dmccrea.me"
 
+USER root
+
 ENV LC_ALL=en_GB.UTF-8
 
 RUN dnf upgrade -y
