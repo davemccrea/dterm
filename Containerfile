@@ -16,13 +16,20 @@ RUN dnf copr enable varlad/helix -y
 RUN dnf copr enable atim/lazygit -y
 
 RUN dnf check-update
-RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix erlang-26.2.2-1.fc39 jq gcc openssl-devel
+RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix jq gcc openssl-devel
+
+# Install Erlang build dependencies
+ARG KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-odbc"
+RUN dnf -y groupinstall -y 'Development Tools' 'C Development Tools and Libraries'
+RUN dnf install -y autoconf ncurses-devel openssl-devel xsltproc fop
 
 # Install asdf
 RUN \
       git clone https://github.com/asdf-vm/asdf.git /opt/asdf && \
       export PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH" && \
       export ASDF_DATA_DIR=/opt/asdf && \
+      asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
+      asdf install erlang 26.2.3 && \
       asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
       asdf install elixir 1.16.1-otp-26 && \
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
@@ -36,6 +43,7 @@ RUN \
       export ASDF_DATA_DIR=/opt/asdf && \
       export PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH" && \
       asdf local elixir 1.16.1-otp-26 && \
+      asdf local erlang 26.2.3 && \
       asdf local nodejs 20.11.0 && \
       mix local.hex --force && \
       mix archive.install hex phx_new --force && \
