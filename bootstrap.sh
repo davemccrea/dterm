@@ -25,8 +25,8 @@ if [ ! -e "$flag_file" ]; then
 
     cd $HOME
     ~/.asdf/bin/asdf reshim
-    ~/.asdf/bin/asdf global elixir 1.16.1-otp-26
-    ~/.asdf/bin/asdf global erlang 26.2.2
+    ~/.asdf/bin/asdf global elixir 1.16.2-otp-26
+    ~/.asdf/bin/asdf global erlang 26.2.5
     ~/.asdf/bin/asdf global nodejs 20.11.0
     ~/.asdf/bin/asdf global gleam latest
 

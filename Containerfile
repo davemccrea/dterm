@@ -31,9 +31,9 @@ RUN \
       export PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH" && \
       export ASDF_DATA_DIR=/opt/asdf && \
       asdf plugin-add erlang https://github.com/asdf-vm/asdf-erlang.git && \
-      asdf install erlang 26.2.2 && \
+      asdf install erlang 26.2.5 && \
       asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git && \
-      asdf install elixir 1.16.1-otp-26 && \
+      asdf install elixir 1.16.2-otp-26 && \
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
       asdf install nodejs 20.11.0 && \
       asdf plugin-add gleam https://github.com/asdf-community/asdf-gleam.git && \
@@ -44,8 +44,8 @@ WORKDIR /tmp
 RUN \
       export ASDF_DATA_DIR=/opt/asdf && \
       export PATH="/opt/asdf/bin:/opt/asdf/shims:$PATH" && \
-      asdf local elixir 1.16.1-otp-26 && \
-      asdf local erlang 26.2.2 && \
+      asdf local elixir 1.16.2-otp-26 && \
+      asdf local erlang 26.2.5 && \
       asdf local nodejs 20.11.0 && \
       mix local.hex --force && \
       mix archive.install hex phx_new --force && \
