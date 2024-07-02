@@ -28,7 +28,7 @@ if [ ! -e "$flag_file" ]; then
     ~/.asdf/bin/asdf global elixir 1.17.1-otp-26
     ~/.asdf/bin/asdf global erlang 26.2.5
     ~/.asdf/bin/asdf global nodejs 20.11.0
-    ~/.asdf/bin/asdf global gleam latest
+    ~/.asdf/bin/asdf global gleam 1.2.1
 
     # Install plugins for neovim
     nvim --headless "+Lazy! sync" +qa

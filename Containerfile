@@ -37,7 +37,7 @@ RUN \
       asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git && \
       asdf install nodejs 20.11.0 && \
       asdf plugin-add gleam https://github.com/asdf-community/asdf-gleam.git && \
-      asdf install gleam latest
+      asdf install gleam 1.2.1
 
 # Install asdf tooling
 WORKDIR /tmp
