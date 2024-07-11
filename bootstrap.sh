@@ -9,7 +9,7 @@ if [ ! -e "$flag_file" ]; then
     chsh -s $(which fish) $USER
 
     # Copy SSH key pair from the host home dir to the container home dir
-    cp -r /home/$USER/.ssh $HOME
+    cp -r /var/home/$USER/.ssh $HOME
 
     # Get dotfiles
     sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
