@@ -15,6 +15,11 @@ if [ ! -e "$flag_file" ]; then
     sudo sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
     chezmoi init --apply git@github.com:davemccrea/dotfiles.git
 
+    # Setup Atuin
+    # Note: the SQLite database is configured in the config file to be saved outside the distrobox container
+    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+
+
     # Configure git
     git config --global pull.rebase true
     git config --global user.name "David McCrea"
