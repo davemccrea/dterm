@@ -24,6 +24,7 @@ if [ ! -e "$flag_file" ]; then
     git config --global pull.rebase true
     git config --global user.name "David McCrea"
     git config --global user.email "git@dmccrea.me" 
+    git config --global init.defaultBranch main
 
     sudo mv /opt/asdf ~/.asdf
     sudo chown -R $USER:$USER ~/.asdf
