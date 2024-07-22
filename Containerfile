@@ -18,7 +18,7 @@ RUN dnf copr enable varlad/helix -y
 RUN dnf copr enable atim/lazygit -y
 
 RUN dnf check-update
-RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix jq gcc openssl-devel
+RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer code helix jq gcc openssl-devel eza
 
 # Install Erlang build dependencies
 ARG KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-odbc"
