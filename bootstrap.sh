@@ -6,7 +6,7 @@ flag_file="$HOME/.bootstrap_run_once_flag"
 
 if [ ! -e "$flag_file" ]; then
     # Set Fish as default shell
-    chsh -s $(which fish) $USER
+    #chsh -s $(which fish) $USER
 
     # Copy SSH key pair from the host home dir to the container home dir
     cp -r /var/home/$USER/.ssh $HOME
