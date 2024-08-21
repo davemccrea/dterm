@@ -5,6 +5,8 @@ set -oue pipefail
 flag_file="$HOME/.bootstrap_run_once_flag"
 
 if [ ! -e "$flag_file" ]; then
+    curl -sS https://starship.rs/install.sh | sh -s -- -y
+
     # Set Fish as default shell
     #chsh -s $(which fish) $USER
 
