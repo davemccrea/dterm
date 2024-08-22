@@ -16,8 +16,7 @@ if [ ! -e "$flag_file" ]; then
 
     # Setup Atuin
     # Note: the SQLite database is configured in the config file to be saved outside the distrobox container
-    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
-
+    curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh | sh
 
     # Configure git
     git config --global pull.rebase true
