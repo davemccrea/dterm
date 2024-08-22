@@ -8,7 +8,7 @@ if [ ! -e "$flag_file" ]; then
     curl -sS https://starship.rs/install.sh | sh -s -- -y
 
     # Set Fish as default shell
-    #chsh -s $(which fish) $USER
+    chsh -s $(which fish) $USER
 
     # Copy SSH key pair from the host home dir to the container home dir
     cp -r /var/home/$USER/.ssh $HOME
