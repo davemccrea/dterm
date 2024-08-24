@@ -5,8 +5,6 @@ set -oue pipefail
 flag_file="$HOME/.dterm_bootstrap_finished"
 
 if [ ! -e "$flag_file" ]; then
-    curl -sS https://starship.rs/install.sh | sh -s -- -y
-
     # Copy SSH key pair from the host home dir to the container home dir
     cp -r /var/home/$USER/.ssh $HOME
 
