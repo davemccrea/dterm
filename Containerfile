@@ -46,7 +46,6 @@ RUN \
       mix local.hex --force && \
       mix archive.install hex phx_new --force && \
       mix do local.rebar --force, local.hex --force && \
-      mix escript.install hex livebook --force && \
       npm install -g @tailwindcss/language-server && \
       npm install -g vscode-langservers-extracted
 
