@@ -41,6 +41,8 @@ if [ ! -e "$flag_file" ]; then
         gh auth login --with-token < /var/home/david/.gh_token
     fi
 
+    npm i @bitwarden/cli
+
     # Install rustup
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
