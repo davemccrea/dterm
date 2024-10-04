@@ -10,11 +10,13 @@ USER root
 ENV LC_ALL=en_GB.UTF-8
 
 RUN dnf upgrade -y
-
 RUN dnf copr enable atim/lazygit -y
-
 RUN dnf check-update
-RUN dnf install -y systemd inotify-tools curl git lazygit neovim fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer jq gcc openssl-devel eza tealdeer ncdu
+RUN dnf install -y systemd inotify-tools curl git lazygit fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide php composer jq gcc openssl-devel eza tealdeer ncdu
+
+# Install latest neovim
+RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+RUN tar -C /opt -xzf nvim-linux64.tar.gz
 
 # Install Erlang build dependencies
 ARG KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac --without-wx --without-odbc"
