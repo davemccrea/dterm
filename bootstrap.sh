@@ -24,27 +24,28 @@ if [ ! -e "$flag_file" ]; then
     git config --global user.email "git@dmccrea.me" 
     git config --global init.defaultBranch main
 
+    # Install rustup
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
     sudo mv /opt/asdf ~/.asdf
     sudo chown -R $USER:$USER ~/.asdf
 
     cd $HOME
-    ~/.asdf/bin/asdf reshim
-    ~/.asdf/bin/asdf global elixir 1.17.1-otp-26
-    ~/.asdf/bin/asdf global erlang 26.2.5
-    ~/.asdf/bin/asdf global nodejs 20.11.0
-    ~/.asdf/bin/asdf global gleam 1.2.1
+    PATH="~/.asdf/bin:~/.asdf/shims:$PATH" && \
+    asdf reshim && \
+    asdf global elixir 1.17.1-otp-26 && \
+    asdf global erlang 26.2.5 && \
+    asdf global nodejs 20.11.0 && \
+    asdf global gleam 1.2.1
 
     # Install plugins for neovim
-    nvim --headless "+Lazy! sync" +qa
+    /opt/nvim-linux64/bin/nvim --headless "+Lazy! sync" +qa
 
     if [ -e "/var/home/david/.gh_token" ]; then
         gh auth login --with-token < /var/home/david/.gh_token
     fi
 
     npm i @bitwarden/cli
-
-    # Install rustup
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
     echo "Bootstrap successful."
     touch "$flag_file"
