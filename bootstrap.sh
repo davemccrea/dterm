@@ -28,7 +28,7 @@ if [ ! -e "$flag_file" ]; then
     # Setup asdf
     sudo mv /opt/asdf ~/.asdf
     sudo chown -R $USER:$USER ~/.asdf
-    export PATH="$PATH:~/.asdf/bin"
+    export PATH="$PATH:~/.asdf/bin:~/.asdf/shims"
     cd $HOME
     asdf reshim
     asdf global elixir 1.17.1-otp-26
