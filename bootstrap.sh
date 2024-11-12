@@ -2,6 +2,8 @@
 
 flag_file="$HOME/.dterm_bootstrap_finished"
 
+set -oue pipefail
+
 if [ ! -e "$flag_file" ]; then
     # Copy SSH key pair from the host home dir to the container home dir
     cp -r /var/home/$USER/.ssh $HOME
