@@ -41,31 +41,27 @@ if [ ! -e "$flag_file" ]; then
     log_header "Starting bootstrap script"
 
     log_info "Copying SSH keys..."
-    cp -r "/var/home/$USER/.ssh" "$HOME" > /dev/null 2>&1
+    cp -r "/var/home/$USER/.ssh" "$HOME"
     log_success "SSH keys copied"
 
     log_info "Configuring git..."
-    git config --global pull.rebase true > /dev/null 2>&1
-    git config --global user.name "David McCrea" > /dev/null 2>&1
-    git config --global user.email "git@dmccrea.me" > /dev/null 2>&1
-    git config --global init.defaultBranch main > /dev/null 2>&1
+    git config --global pull.rebase true
+    git config --global user.name "David McCrea"
+    git config --global user.email "git@dmccrea.me"
+    git config --global init.defaultBranch main
     log_success "Git configured"
 
     log_info "Installing dotfiles..."
-    chezmoi init --apply "git@github.com:davemccrea/dotfiles.git" > /dev/null 2>&1
+    chezmoi init --apply "git@github.com:davemccrea/dotfiles.git"
     log_success "Dotfiles installed"
 
-    log_info "Installing atuin..."
-    curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh | sh > /dev/null 2>&1
-    log_success "Atuin installed"
-
     log_info "Installing neovim plugins..."
-    /usr/bin/nvim --headless "+Lazy! sync" +qa > /dev/null 2>&1
+    /usr/bin/nvim --headless "+Lazy! sync" +qa
     log_success "Neovim plugins installed"
 
     if [ -e "/var/home/david/.gh_token" ]; then
         log_info "Configuring GitHub CLI..."
-        gh auth login --with-token < "/var/home/david/.gh_token" > /dev/null 2>&1
+        gh auth login --with-token < "/var/home/david/.gh_token"
         log_success "GitHub CLI configured"
     fi
 

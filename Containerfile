@@ -5,7 +5,9 @@ LABEL com.github.containers.toolbox="true" \
       summary="A cloud-native terminal experience" \
       maintainer="github@dmccrea.me"
 
-RUN apk add inotify-tools lazygit fish tmux fzf fd ripgrep bat exiftool ffmpeg github-cli zoxide jq eza xsel clipboard neovim elixir chezmoi
+RUN apk add inotify-tools gcc clang make fzf fd ripgrep bat zoxide jq eza xsel clipboard \
+	atuin chezmoi lazygit fish tmux exiftool ffmpeg github-cli neovim \
+	elixir npm go rustup zig
 
 COPY bootstrap.sh /usr/bin
 
