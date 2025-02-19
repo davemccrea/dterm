@@ -65,6 +65,18 @@ if [ ! -e "$flag_file" ]; then
         log_success "GitHub CLI configured"
     fi
 
+    log_info "Installing Hex..."
+    mix do local.rebar --force, local.hex --force
+    log_success "Hex installed"
+
+    log_info "Installing Phoenix..."
+    mix archive.install hex phx_new --force
+    log_success "Phoenix installed"
+
+    log_info "Installing Livebook..."
+    mix escript.install hex livebook --force
+    log_success "Livebook installed"
+
     touch "$flag_file"
     log_header "Bootstrap complete! 🎉"
 fi
