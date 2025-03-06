@@ -7,7 +7,7 @@ LABEL com.github.containers.toolbox="true" \
 
 RUN apk add inotify-tools gcc clang make fzf fd ripgrep bat zoxide jq eza xsel clipboard \
 	atuin chezmoi lazygit fish tmux exiftool ffmpeg github-cli neovim starship \
-	elixir npm go rustup zig
+	elixir nodejs npm go rustup zig
 
 COPY bootstrap.sh /usr/bin
 
