@@ -40,7 +40,12 @@ trap 'error_handler ${LINENO} $?' ERR
 if [ ! -e "$flag_file" ]; then
     log_header "Starting bootstrap script"
 
-    log_info "Copying SSH keys..."
+    log_info "Create symlinks for docker and podman"
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/podman
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/docker
+    log_success "Symlinks created"
+
+    log_info "copying ssh keys..."
     cp -r "/var/home/$USER/.ssh" "$HOME"
     log_success "SSH keys copied"
 
