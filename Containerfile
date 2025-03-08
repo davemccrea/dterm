@@ -5,9 +5,9 @@ LABEL com.github.containers.toolbox="true" \
       summary="A cloud-native terminal experience" \
       maintainer="github@dmccrea.me"
 
-ENV LC_ALL=en_GB.UTF-8
+ENV LC_ALL=en_GB.UTF-8 LANG=en_GB.UTF-8
 
-RUN dnf install -y inotify-tools fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide jq xsel neovim python3-neovim rustup golang
+RUN dnf install -y inotify-tools fish tmux fzf fd-find ripgrep bat perl-Image-ExifTool gh zoxide jq xsel neovim python3-neovim golang lsd
 RUN dnf --repo=rawhide install -y elixir elixir-doc erlang erlang-doc
 RUN dnf copr enable atim/lazygit -y && dnf install -y lazygit
 RUN sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/bin

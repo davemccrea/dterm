@@ -68,8 +68,8 @@ if [ ! -e "$flag_file" ]; then
     /usr/bin/nvim --headless "+Lazy! sync" +qa
     log_success "Neovim plugins installed"
 
-    log_info "Running rustup-init..."
-    rustup-init
+    log_info "Installing Rust..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     log_success "Rust installed"
 
     log_info "Installing Hex..."
