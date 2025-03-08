@@ -69,7 +69,7 @@ if [ ! -e "$flag_file" ]; then
     log_success "Neovim plugins installed"
 
     log_info "Installing Rust..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     log_success "Rust installed"
 
     log_info "Installing Hex..."
